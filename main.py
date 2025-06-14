@@ -250,48 +250,43 @@ while running:
 
 pygame.quit()
 sys.exit()
-                running = False
+running = False
 
-    if help_visible:
-        SCREEN.fill(BLACK) # Clear screen for help menu
-        draw_text("Help:", large_font, WHITE, SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT // 2 - 100)
-        draw_text("Collect at least 20 snacks.", font, WHITE, SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 20)
-    if help_visible:
-        SCREEN.fill(BACKGROUND_COLOR) # Fill with main background
-
-        # Draw semi-transparent overlay
-        overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
-        overlay.fill(OVERLAY_COLOR_DARK)
-        SCREEN.blit(overlay, (0, 0))
-
-        title_text = "Help Menu"
-        title_surf = large_font.render(title_text, True, HELP_TITLE_COLOR)
-        title_rect = title_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 3))
-        SCREEN.blit(title_surf, title_rect)
-
-        help_lines = [
-            ("Collect at least 20 snacks to win.", SCREEN_HEIGHT // 2 - 20),
-            ("Reach the finish line after it appears (timer ends).", SCREEN_HEIGHT // 2 + 20),
-            ("Movement: A/D or Q/D or Arrow Keys.", SCREEN_HEIGHT // 2 + 60),
-            ("Press H to close this help menu.", SCREEN_HEIGHT // 2 + 120)
-        ]
-        for line, y_pos in help_lines:
-            line_surf = font.render(line, True, HELP_INFO_COLOR)
-            line_rect = line_surf.get_rect(center=(SCREEN_WIDTH // 2, y_pos))
-            SCREEN.blit(line_surf, line_rect)
-
+if help_visible:
+    SCREEN.fill(BLACK) # Clear screen for help menu
+    draw_text("Help:", large_font, WHITE, SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT // 2 - 100)
+    draw_text("Collect at least 20 snacks.", font, WHITE, SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 20)
+if help_visible:
+    SCREEN.fill(BACKGROUND_COLOR) # Fill with main background
+    # Draw semi-transparent overlay
+    overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+    overlay.fill(OVERLAY_COLOR_DARK)
+    SCREEN.blit(overlay, (0, 0))
+    title_text = "Help Menu"
+    title_surf = large_font.render(title_text, True, HELP_TITLE_COLOR)
+    title_rect = title_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 3))
+    SCREEN.blit(title_surf, title_rect)
+    help_lines = [
+    ("Collect at least 20 snacks to win.", SCREEN_HEIGHT // 2 - 20),
+    ("Reach the finish line after it appears (timer ends).", SCREEN_HEIGHT // 2 + 20),
+    ("Movement: A/D or Q/D or Arrow Keys.", SCREEN_HEIGHT // 2 + 60),
+    ("Press H to close this help menu.", SCREEN_HEIGHT // 2 + 120)
+    ]
+    for line, y_pos in help_lines:
+        line_surf = font.render(line, True, HELP_INFO_COLOR)
+        line_rect = line_surf.get_rect(center=(SCREEN_WIDTH // 2, y_pos))
+        SCREEN.blit(line_surf, line_rect)
         pygame.display.flip()
         continue # Skip game logic if help is visible
 
-    if not game_over:
-        keys = pygame.key.get_pressed()
-        
-        # Player movement is now only sideways. The illusion of moving forward
-        # is created by moving the snacks downwards faster.
-
-        # Handle left movement (QWERTY A, AZERTY Q, or Arrow Left)
-        if keys[pygame.K_a] or keys[pygame.K_LEFT] or keys[pygame.K_q]:
-            player_x -= player_speed
+if not game_over:
+    keys = pygame.key.get_pressed()
+    
+    # Player movement is now only sideways. The illusion of moving forward
+    # is created by moving the snacks downwards faster.
+    # Handle left movement (QWERTY A, AZERTY Q, or Arrow Left)
+    if keys[pygame.K_a] or keys[pygame.K_LEFT] or keys[pygame.K_q]:
+        player_x -= player_speed
         # Handle right movement (QWERTY D, AZERTY D, or Arrow Right)
         if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             player_x += player_speed
